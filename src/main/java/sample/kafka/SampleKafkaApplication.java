@@ -16,6 +16,8 @@
 
 package sample.kafka;
 
+import java.util.Date;
+
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -31,8 +33,8 @@ public class SampleKafkaApplication {
     @Bean
     public ApplicationRunner runner(Producer producer) {
         return (args) -> {
-            for(int i = 1; i < 20; i++) {
-                    producer.send(new SampleMessage(i, "A simple test message"));
+            for(int i = 0; i < 20; ) {
+                    producer.send(new SampleMessage(++i, "A simple test message" + new Date()));
             }
         };
     }
